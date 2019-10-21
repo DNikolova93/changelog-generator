@@ -1,3 +1,11 @@
+# Version 3 (2019-10-21)
+
+## Features
+* Implemented versioning for the changelog generator ([18034f](https://github.com/DNikolova93/changelog-generator/commit/18034ff6d4270889b41176aeade32f8922acbeee))
+
+## Chores
+* added dummy.txt file ([397ff0](https://github.com/DNikolova93/changelog-generator/commit/397ff08fe79edc4c08075c2e820024c5d76a09dc))
+
 # Version 2 (2019-10-21)
 
 ## Features
