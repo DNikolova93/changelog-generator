@@ -1,7 +1,10 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 
-const output = execSync(`git log --format=%B%H----DELIMITER----`).toString('utf-8');
+// Get latest tag version
+const latestTag = execSync(`git describe --long`).toString('utf-8').split('-')[0];
+console.log('latest tag', latestTag);
+const output = execSync(`git log ${latestTag}..HEAD --format=%B%H----DELIMITER----`).toString('utf-8');
 
 // adding delimiter string to help us to splut the string
 // filtered the commit if it doesn't have SHA hash
@@ -65,6 +68,15 @@ if (chores.length) {
 
   newChangelog += `\n`;
 }
-
 // prepend newChangelog to the current one
 fs.writeFileSync('./CHANGELOG.md', `${newChangelog}${currentChangelog}`);
+
+// update package.json
+fs.writeFileSync('./package.json', JSON.stringify({ version: String(newVersion) }, null, 2));
+
+// create new commit
+execSync('git add .');
+execSync(`git commit -m "chore: Bump to version ${newVersion}"`);
+
+// tag to commit
+execSync(`git taf -a -m "Tag for version ${newVersion} version${newVersion}`);
