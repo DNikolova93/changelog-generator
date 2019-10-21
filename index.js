@@ -79,4 +79,4 @@ execSync('git add .');
 execSync(`git commit -m "chore: Bump to version ${newVersion}"`);
 
 // tag to commit
-execSync(`git tag -a -m "Tag for version ${newVersion} version${newVersion}"`);
+execSync(`git tag -a -m "Tag for version ${newVersion}" version${newVersion}`);
